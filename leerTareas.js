@@ -12,8 +12,10 @@ export async function leerTareas() {
         
         tareas.forEach(tarea => {
             console.log(`
+            ============================
             tarea: ${tarea.nombre}
-            descripcion: ${tarea.desc}`);
+            descripcion: ${tarea.desc}
+            ============================`);
         });
         return tareas;
     } catch (error) {

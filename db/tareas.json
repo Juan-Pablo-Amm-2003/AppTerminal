@@ -1,1 +1,1 @@
-[{"nombre":"primer tarea","desc":"ejemplo"},{"nombre":"segunda tarea","desc":"ejemplo"},{"nombre":"tercera tarea","desc":"ejemplo"},{"nombre":"cuarta tarea","desc":"ejemplo"},{"nombre":"BOCA","desc":"AAAAAAAAAAAAA"},{"nombre":"BOCA","desc":"AAAAAAAAAAAAA"}]
+[{"nombre":"primer tarea","desc":"ejemplo"},{"nombre":"segunda tarea","desc":"ejemplo"},{"nombre":{"nombre":"limpiar"},"desc":"dd"},{"nombre":{"nombre":"limpiar "},"desc":{"descripcion":"habitacion"}},{"nombre":"quinta tarea","desc":"ordenar"},{"nombre":"sexta tarea","desc":"limpiar"}]

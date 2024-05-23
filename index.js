@@ -1,15 +1,16 @@
 "use strict"
 
 
-import path from 'path';
-import fs from 'fs/promises';
 import inquirer from "inquirer";
 import { esperarConfrimacion } from "./esperarConfrimacion.js";
 import { leerTareas } from './leerTareas.js';
+import { agregarTarea } from "./agregarTarea.js";
+import { eliminarTarea } from "./eliminarTarea.js";
+import { escribirTareas } from "./escribirTareas.js";
 
 
 
-//el top lvl await esta incorporado en la version en node 16
+
 
 while(true){
     console.clear()
@@ -25,29 +26,53 @@ while(true){
     });
     
 
+    if (respuesta.opcion === "Editar tareas") {
+        const tareas = await leerTareas();
+    
+        const seleccionadoEditar = await inquirer.prompt({
+            type: "list",
+            name: "nombre",
+            message: "Seleccione una tarea a editar: ",
+            choices: tareas.map((tarea) => tarea.nombre)
+        });
+
+        const ingreseNuevaDesc = await inquirer.prompt({
+            type: 'input',
+            name: 'desc',
+            message: `Ingrese la nueva descripcion de su tarea${seleccionadoEditar.nombre}: `,
+        });
+    
+        const tareasMapeadas = tareas.map((tarea) => {
+            if (tarea.nombre === seleccionadoEditar.nombre) {  
+                tarea.desc = ingreseNuevaDesc.desc;
+            }
+            return tarea; 
+        });
+    
+        await escribirTareas(tareasMapeadas);
+    }
+    
+    if (respuesta.opcion === "Eliminar tareas") {
+        await eliminarTarea();
+    }
     
     if (respuesta.opcion === "Leer tareas") {
         await leerTareas();
     }
 
     if (respuesta.opcion === "Agregar tareas") {
-        const tareas = await leerTareas();
-
-       tareas.push({ nombre: "BOCA", desc: "AAAAAAAAAAAAA" });
-   
-         const dbpath = path.resolve("db", "tareas.json");
-         const jsonString = JSON.stringify(tareas);
-         await fs.writeFile(dbpath, jsonString);
-
-         console.log(tareas);
-    }
+        await agregarTarea();
+        }
     
     if (respuesta.opcion === "salir") {
         break;
     }
 
-    await esperarConfrimacion();
+    await esperarConfrimacion();             
 }
+
+
+
 
 
 
