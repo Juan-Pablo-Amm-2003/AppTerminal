@@ -1,7 +1,7 @@
 "use strict";
 import inquirer from "inquirer";
-import { leerTareas } from './leerTareas.js';
-import { escribirTareas } from './escribirTareas.js';
+import { leerTareas } from '../crud/leerTareas.js';
+import { escribirTareas } from '../crud/escribirTareas.js';
 
 export async function agregarTarea() {
     const tareas = await leerTareas();
